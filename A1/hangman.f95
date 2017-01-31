@@ -1,17 +1,24 @@
 program hangman
 !A1 CIS*3190
+!Feb 3rd, 2017
 !The Game of Hangman. Converted from Fortran 77 into Fortran 95
 !Written by Christopher Katsaras 
-!This program plays the game of hangman
+!******************
+!Known Limitations:
+!******************
+!1. Inputting ' or " for a READ statement will result in a limbo as it is expecting a closing quote.
+!   e.g "a" or 'a' to input the letter a. To make life easier for yourself, simply do not type quotes.
+!2. The dictionary currently has 10 words, if you wish to add more words or have less in the dictionary
+!   then you must modify
 
 integer :: i,j,z,answerLength,validGuess,correctLetter,incorrectGuesses,seed,wordIndex
 real :: random
-real, dimension(10) :: guessedWords = 0
+real, dimension(10) :: guessedWords = 0 !Guessed words 
 logical :: freeWords
 character :: person(12,12) !2D array that holds the values for the "person" being hanged
 character (len = 20) :: answer !Holds the word to be displayed
 character (len = 20) :: maskedAnswer !Holds the masked answer to be uncovered by player
-character (len = 20) :: userGuess
+character (len = 20) :: userGuess !Holds the users guess (When they are given the option to guess the whole word)
 character, dimension(26) :: guessedLetters !Holds the letters already guessed by the player
 character :: guess, playFlag
 character (len = 20), dimension(10) :: dictionary
@@ -37,6 +44,7 @@ do while(playFlag == 'Y')
     do i=1,20
         maskedAnswer(i:i) = '-'
     end do
+
     validGuess = 0
     correctLetter = 0
     incorrectGuesses = 1
@@ -45,9 +53,9 @@ do while(playFlag == 'Y')
     !Loops until a word from the dictionary is picked that the user has not previously played with
     do
         call random_number(random)
-        random = random * 100 
-        random = MODULO(random,10.0)
-        wordIndex = ceiling(random)
+        random = random * 100 !Due to the fact that the random number is between 0-1 , we multiply it by 100 to get a number between 0 and 100
+        random = MODULO(random,10.0) !Modulo allows us to get a number within the size of our dictionary
+        wordIndex = ceiling(random) !Lastly, ceiling allows us to get an integer which is now our index
         if(guessedWords(wordIndex) == 0) then
             guessedWords(wordIndex) = 1
             answer = dictionary(wordIndex)
@@ -92,7 +100,7 @@ do while(playFlag == 'Y')
 
         !Draws the updated noose if the user guessed incorrectly
         if(correctLetter == 0) then
-
+            !Based on the number of incorrect guesses, we draw a specific body part
             select case (incorrectGuesses)
                 case (1)
                     write(*,*)'First we draw a head.'
@@ -139,8 +147,8 @@ do while(playFlag == 'Y')
                 WRITE (*,*) (person(z,j),j=1,12)
             end do
             incorrectGuesses = incorrectGuesses + 1
-        else
-            write (*,*) maskedAnswer(1:answerLength)
+        else !Else, if the user guesses correctly, let them guess the word
+            write (*,*) maskedAnswer(1:answerLength) 
             write(*,*) 'What is your guess for the word?'
             read(*,*) userGuess
             if(userGuess == answer) then
