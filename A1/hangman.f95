@@ -23,7 +23,9 @@ character, dimension(26) :: guessedLetters !Holds the letters already guessed by
 character :: guess, playFlag
 character (len = 20), dimension(10) :: dictionary
 playFlag = 'Y'
-data dictionary /'chris','katsaras','john','monkey','tophat','man','backpack','rockstar','bailey','frodo'/
+dictionary = [character(20) :: 'chris','katsaras','john','monkey', &
+                         'man','tophat','backpack','rockstar', &
+                         'bailey','frodo'] !Initializes dictionary with words user can play with
 call random_seed(seed) 
 
 
