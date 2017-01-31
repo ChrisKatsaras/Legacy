@@ -61,7 +61,7 @@ do while(playFlag == 'Y')
         
         write (*,*) maskedAnswer(1:answerLength)
         write (*,*) 'Here are the letters you have guessed already' 
-        write (*,*) guessedLetters(1:10)
+        write (*,*) guessedLetters(1:26)
 
         do while(validGuess == 0)
 
