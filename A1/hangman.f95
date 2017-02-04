@@ -10,6 +10,8 @@ program hangman
 !   e.g "a" or 'a' to input the letter a. To make life easier for yourself, simply do not type quotes.
 !2. The dictionary currently has 10 words, if you wish to add more words or have less in the dictionary
 !   then you must modify
+!2. Dictionary words can currently only be 20 characters long. Modification of dictionary declearation
+!   is needed to allow larger words
 
 integer :: i,j,z,answerLength,validGuess,correctLetter,incorrectGuesses,seed,wordIndex
 real :: random
@@ -178,7 +180,7 @@ do while(playFlag == 'Y')
         write (*,*) "There are no words left"
         playFlag = 'N'
     else
-        write(*,*) 'Would you like to play again? (Y/N)'
+        write(*,*) 'Would you like to play again?(Type Y to play again or any other key to exit)'
         read(*,*) playFlag !Prompts the user if they would like to play again
     end if   
     
