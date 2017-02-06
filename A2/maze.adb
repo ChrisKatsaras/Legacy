@@ -37,13 +37,13 @@ begin
    for i in 1..length loop
    		for j in 1..width loop
    			get(infp,scanChar);
-   			maze(i,j).symbol := scanChar;
+   			maze(j,i).symbol := scanChar;
    			if(scanChar = 'o') then
-   				currentX := i;
-   				currentY := j;
+   				currentX := j;
+   				currentY := i;
    				currentSymbol := 'o';
    				push(currentSymbol,currentX,currentY);
-   				maze(i,j).isVisited := true;
+   				--maze(i,j).isVisited := true;
    			end if; 
    		end loop;
    end loop;
@@ -53,19 +53,39 @@ begin
    		pop(currentSymbol,currentX,currentY);
    		put(Integer'image(currentX));
    		put(Integer'image(currentY));
+   		put(currentSymbol);
    		if(currentSymbol = 'e') then
    			put("We found the end!");
-   		elsif(maze(currentX,currentY).symbol /= '*' and maze(currentX,currentY).isVisited = false) then
+   			print;
+   			exit;
+   		elsif(currentSymbol /= '*' and maze(currentX,currentY).isVisited = false) then
    			maze(currentX,currentY).isVisited := true;
-   			if(currentY+1 <= width) then
-   				push(maze(currentX,currentY).symbol,currentX,currentY+1);
+   			if(currentX+1 < width) then
+   				put("Pushing East Cell");
+   				push(maze(currentX+1,currentY).symbol,currentX+1,currentY);
+   			end if;	
+
+   			if(currentX-1 > 1) then
+   				put("Pushing West Cell");
+   				push(maze(currentX-1,currentY).symbol,currentX-1,currentY);
    			end if;
+
+   			if(currentY-1 > 1) then
+   				put("Pushing North Cell");
+   				push(maze(currentX,currentY-1).symbol,currentX,currentY-1);
+   			end if;
+
+   			if(currentY+1 < length) then
+   				put("Pushing south Cell");
+   				push(maze(currentX,currentY+1).symbol,currentX,currentY+1);
+   			end if;
+
    		end if;
+   		new_line;
    end loop;
 
-   --push('x',2,3);
-   --push('*',10,2);	
-   --print;
+
+
    close(infp);
 
 end Maze;
