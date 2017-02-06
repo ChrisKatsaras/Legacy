@@ -6,6 +6,7 @@ A -fPIC
 P SS ZX
 
 RN
+RV NO_DIRECT_BOOLEAN_OPERATORS
 RV NO_EXCEPTION_HANDLERS
 RV NO_EXCEPTIONS
 RV NO_IO
@@ -13,7 +14,7 @@ RV NO_NESTED_FINALIZATION
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U maze%b		maze.adb		bf7e1674 NE OO SU
+U maze%b		maze.adb		daf27326 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -23,6 +24,7 @@ W ada.strings.unbounded.text_io%s  a-suteio.adb	a-suteio.ali
 W ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W stack%s		stack.adb		stack.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
 W system.soft_links%s	s-soflin.adb		s-soflin.ali
 W system.standard_library%s  s-stalib.adb	s-stalib.ali
 
@@ -44,8 +46,8 @@ D a-tiinio.ads		20160516092928 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20160516092931 f9eb8f06 ada.unchecked_conversion%s
 D interfac.ads		20160516092928 5ab55268 interfaces%s
 D i-cstrea.ads		20160516092927 e53d8b8e interfaces.c_streams%s
-D maze.adb		20170206015849 5563a841 maze%b
-D stack.ads		20170206015033 3d72ff2a stack%s
+D maze.adb		20170206161153 31a4efbc maze%b
+D stack.ads		20170206022200 3c39dd85 stack%s
 D system.ads		20160516092931 c3282aa7 system%s
 D s-atocou.ads		20160516092932 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20160516092927 0ebbdb71 system.crtl%s
@@ -53,6 +55,7 @@ D s-exctab.ads		20160516092931 54135002 system.exception_table%s
 D s-ficobl.ads		20160516092933 078245e4 system.file_control_block%s
 D s-finmas.ads		20160516092931 7811a767 system.finalization_masters%s
 D s-finroo.ads		20160516092931 4ff27390 system.finalization_root%s
+D s-imgint.ads		20160516092928 02dbe0c2 system.img_int%s
 D s-memory.ads		20160516092930 597d6634 system.memory%s
 D s-parame.ads		20160516092932 7e2a0d7f system.parameters%s
 D s-secsta.ads		20160516092931 86a2856d system.secondary_stack%s
@@ -75,44 +78,49 @@ X 9 a-string.ads
 16K13*Strings 35e16 19|3r10 3r37 4r10 4r45
 X 11 a-strunb.ads
 76K21*Unbounded 489e26 19|3w18 3r45 4r18 4r53
-79R9*Unbounded_String<5|43R9> 473e14 19|11r15 12r11
+79R9*Unbounded_String<5|43R9> 473e14 19|9r15 10r11
 X 12 a-suteio.ads
 39K31*Text_IO 61e34 19|4w28 4r63
 X 14 a-textio.ads
 49K13*Text_IO 471e16 19|1w10 1r27
-52P9*File_Type 19|10r11
-53n23*In_File{53E9} 19|25r14
-92U14*Open 19|25s4
-98U14*Close 19|46s4
-205U14*Get 19|32s25
-263U14*Put_Line 19|23s4
+52P9*File_Type 19|8r11
+53n23*In_File{53E9} 19|32r14
+92U14*Open 19|32s4
+98U14*Close 19|71s4
+205U14*Get 19|39s25
+242U14*Put 19|52s17 54s17 55s17 57s25
 X 15 a-tiinio.ads
-51U14*Get 19|26s4[6|18] 27s4[6|18]
+51U14*Get 19|33s4[6|18] 34s4[6|18]
 X 19 maze.adb
-6U11*Maze 6b11 48l5 48t9
-10p4 infp{14|52P9} 25m9 25r9 26r8 27r8 32r29 46m10 46r10
-11r4 filename{11|79R9}
-12r4 line{11|79R9}
-13i4 length{integer} 26m13 30r16
-14i4 width{integer} 27m13 31r29
-15e4 scanChar{character} 32m34 33r38 34r28
-16a4 maze(character) 33m25
-17i4 currentX{integer} 35m33 44m22
-18i4 currentY{integer} 36m33 44m31
-19e4 currentSymbol{character} 37m33 44m8
-30i8 i{integer} 33r30 35r45
-31i21 j{integer} 33r32 36r45
+6U11*Maze 6b11 73l5 73t9
+8p4 infp{14|52P9} 32m9 32r9 33r8 34r8 39r29 71m10 71r10
+9r4 filename{11|79R9}
+10r4 line{11|79R9}
+11i4 length{integer} 33m13 37r16
+12i4 width{integer} 34m13 38r29 60r42
+13e4 scanChar{character} 39m34 40r45 41r28
+16R9 cell 20e19 21r48
+18e17 symbol{character} 40m35 58r47 61r62
+19b17 isVisited{boolean} 46m43 58r89 59m49
+21A9 mazeStructure(16R9)<integer><integer> 22r11
+22a4 maze{21A9} 40m25 46m33 58r23 58r65 59m25 61r38
+24i4 currentX{integer} 42m33 45r52 53m35 54r35 58r28 58r70 59r30 61r43 61r69
+25i4 currentY{integer} 43m33 45r61 53m44 55r35 58r37 58r79 59r39 60r28 61r52
+. 61r78
+26e4 currentSymbol{character} 44m33 45r38 53m21 56r20
+37i8 i{integer} 40r30 42r45 46r38
+38i21 j{integer} 40r32 43r45 46r40
 X 20 stack.ads
 1K9*stack 19|5w6 5r17 20|6e10
-2U19*push 19|42s4 43s4
-3U19*print 19|45s4
-4U19*pop 19|44s4
+2U19*push 19|45s33 61s33
+4U19*pop 19|53s17
+5V18*isEmpty{boolean} 19|51s10
 X 21 system.ads
 67M9*Address
-X 28 s-memory.ads
+X 29 s-memory.ads
 53V13*Alloc{21|67M9} 103i<c,__gnat_malloc>22
 68U14*Free 104i<c,__gnat_free>22
 76V13*Realloc{21|67M9} 105i<c,__gnat_realloc>22
-X 34 s-stalib.adb
+X 35 s-stalib.adb
 93U14 Break_Start 94i<c,__gnat_break_start>22
 
