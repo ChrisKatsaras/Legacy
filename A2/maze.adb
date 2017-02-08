@@ -10,8 +10,8 @@ procedure Maze is
    line : unbounded_string;
    length : integer := 0; 
    width : integer := 0;
+   turns : integer := 0;
    scanChar : character;
-   testing : Boolean;
 
    type cell is
  	record
@@ -61,9 +61,11 @@ begin
    			put("We found the end!");
    			new_line;
    			maze(currentX,currentY).path := 1;
-   			--print;
+   			put("Printing stack");
+   			print;
    			exit;
    		elsif(currentSymbol /= '*' and maze(currentX,currentY).isVisited = false) then
+   		    turns := turns +1;
    			maze(currentX,currentY).isVisited := true;
    			maze(currentX,currentY).path := 1;
    			if(currentX+1 <= width) then
@@ -85,7 +87,9 @@ begin
    				put("Pushing south Cell");
    				push(maze(currentX,currentY+1).symbol,currentX,currentY+1);
    			end if;
+   			
    		end if;
+
    		new_line;
    end loop;
 
@@ -98,6 +102,7 @@ begin
    		end loop;
    		new_line;
    end loop;
+   put(Integer'image(turns));
 
 end Maze;
 
