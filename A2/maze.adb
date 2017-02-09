@@ -40,6 +40,7 @@ begin
    			get(infp,scanChar);
    			maze(j,i).symbol := scanChar;
    			maze(j,i).path := 0;
+            maze(j,i).isVisited := false;
    			if(scanChar = 'o') then
    				currentX := j;
    				currentY := i;

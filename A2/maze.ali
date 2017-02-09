@@ -14,7 +14,7 @@ RV NO_NESTED_FINALIZATION
 RV NO_DEFAULT_INITIALIZATION
 RV SPARK_05
 
-U maze%b		maze.adb		ece6d6ba NE OO SU
+U maze%b		maze.adb		d9c65748 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -46,8 +46,8 @@ D a-tiinio.ads		20160516092928 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20160516092931 f9eb8f06 ada.unchecked_conversion%s
 D interfac.ads		20160516092928 5ab55268 interfaces%s
 D i-cstrea.ads		20160516092927 e53d8b8e interfaces.c_streams%s
-D maze.adb		20170208153421 07b04a20 maze%b
-D stack.ads		20170208153545 3c39dd85 stack%s
+D maze.adb		20170209025622 3290cbd2 maze%b
+D stack.ads		20170209025524 3c39dd85 stack%s
 D system.ads		20160516092931 c3282aa7 system%s
 D s-atocou.ads		20160516092932 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20160516092927 0ebbdb71 system.crtl%s
@@ -86,45 +86,45 @@ X 14 a-textio.ads
 52P9*File_Type 19|8r11
 53n23*In_File{53E9} 19|33r14
 92U14*Open 19|33s4
-98U14*Close 19|97s4
-166U14*New_Line 19|62s25 93s17 103s17
+98U14*Close 19|98s4
+166U14*New_Line 19|63s25 94s17 104s17
 205U14*Get 19|40s25
-208U14*Put 19|58s17
-242U14*Put 19|54s17 56s17 57s17 61s25 64s25 72s33 77s33 82s33 87s33 101s25
-. 105s4
+208U14*Put 19|59s17
+242U14*Put 19|55s17 57s17 58s17 62s25 65s25 73s33 78s33 83s33 88s33 102s25
+. 106s4
 X 15 a-tiinio.ads
 51U14*Get 19|34s4[6|18] 35s4[6|18]
 X 19 maze.adb
-6U11*Maze 6b11 107l5 107t9
-8p4 infp{14|52P9} 33m9 33r9 34r8 35r8 40r29 97m10 97r10
+6U11*Maze 6b11 108l5 108t9
+8p4 infp{14|52P9} 33m9 33r9 34r8 35r8 40r29 98m10 98r10
 9r4 filename{11|79R9}
 10r4 line{11|79R9}
-11i4 length{integer} 34m13 38r16 86r42 99r16
-12i4 width{integer} 35m13 39r29 71r42 100r29
-13i4 turns{integer} 68m21 68r30 105r22
-14e4 scanChar{character} 40m34 41r45 43r28
+11i4 length{integer} 34m13 38r16 87r42 100r16
+12i4 width{integer} 35m13 39r29 72r42 101r29
+13i4 turns{integer} 69m21 69r30 106r22
+14e4 scanChar{character} 40m34 41r45 44r28
 16R9 cell 21e19 22r48
-18e17 symbol{character} 41m35 73r64 78r64 83r64 88r64
-19b17 isVisited{boolean} 67r72 69m49
-20i17 path{integer} 42m35 63m49 70m49 101r53
+18e17 symbol{character} 41m35 74r64 79r64 84r64 89r64
+19b17 isVisited{boolean} 43m23 68r72 70m49
+20i17 path{integer} 42m35 64m49 71m49 102r53
 22A9 mazeStructure(16R9)<integer><integer> 23r11
-23a4 maze{22A9} 41m25 42m25 63m25 67r48 69m25 70m25 73r38 78r38 83r38 88r38
-. 101r43
-25i4 currentX{integer} 44m33 47r52 55m35 56r35 63r30 67r53 69r30 70r30 71r28
-. 73r43 73r71 76r28 78r43 78r71 83r43 83r71 88r43 88r71
-26i4 currentY{integer} 45m33 47r61 55m44 57r35 63r39 67r62 69r39 70r39 73r54
-. 73r82 78r54 78r82 81r28 83r52 83r80 86r28 88r52 88r80
-27e4 currentSymbol{character} 46m33 47r38 55m21 58r21 60r20 67r23
-38i8 i{integer} 41r32 42r32 45r45
-39i21 j{integer} 41r30 42r30 44r45
-99i8 i{integer} 101r50
-100i21 j{integer} 101r48
+23a4 maze{22A9} 41m25 42m25 43m13 64m25 68r48 70m25 71m25 74r38 79r38 84r38
+. 89r38 102r43
+25i4 currentX{integer} 45m33 48r52 56m35 57r35 64r30 68r53 70r30 71r30 72r28
+. 74r43 74r71 77r28 79r43 79r71 84r43 84r71 89r43 89r71
+26i4 currentY{integer} 46m33 48r61 56m44 58r35 64r39 68r62 70r39 71r39 74r54
+. 74r82 79r54 79r82 82r28 84r52 84r80 87r28 89r52 89r80
+27e4 currentSymbol{character} 47m33 48r38 56m21 59r21 61r20 68r23
+38i8 i{integer} 41r32 42r32 43r20 46r45
+39i21 j{integer} 41r30 42r30 43r18 45r45
+100i8 i{integer} 102r50
+101i21 j{integer} 102r48
 X 20 stack.ads
 1K9*stack 19|5w6 5r17 20|6e10
-2U19*push 19|47s33 73s33 78s33 83s33 88s33
-3U19*print 19|65s25
-4U19*pop 19|55s17
-5V18*isEmpty{boolean} 19|53s10
+2U19*push 19|48s33 74s33 79s33 84s33 89s33
+3U19*print 19|66s25
+4U19*pop 19|56s17
+5V18*isEmpty{boolean} 19|54s10
 X 21 system.ads
 67M9*Address
 X 29 s-memory.ads
