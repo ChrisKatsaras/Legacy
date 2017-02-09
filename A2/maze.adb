@@ -40,6 +40,7 @@ begin
    			get(infp,scanChar);
    			maze(j,i).symbol := scanChar;
    			maze(j,i).path := 0;
+            maze(j,i).isVisited := false;
    			if(scanChar = 'o') then
    				currentX := j;
    				currentY := i;
@@ -51,7 +52,7 @@ begin
    end loop;
 
    while isEmpty = false loop 
-   		put("Looking a cell at location");
+   		put("Looking a cell at location"); new_line;
    		pop(currentSymbol,currentX,currentY);
    		put(Integer'image(currentX));
    		put(Integer'image(currentY));
@@ -65,28 +66,28 @@ begin
    			print;
    			exit;
    		elsif(currentSymbol /= '*' and maze(currentX,currentY).isVisited = false) then
-   		    turns := turns +1;
    			maze(currentX,currentY).isVisited := true;
    			maze(currentX,currentY).path := 1;
-   			if(currentX+1 <= width) then
-   				put("Pushing East Cell");
-   				push(maze(currentX+1,currentY).symbol,currentX+1,currentY);
-   			end if;	
 
-   			if(currentX-1 >= 1) then
-   				put("Pushing West Cell");
-   				push(maze(currentX-1,currentY).symbol,currentX-1,currentY);
-   			end if;
+			put("Pushing East Cell"); new_line;
+			push(maze(currentX+1,currentY).symbol,currentX+1,currentY);
 
-   			if(currentY-1 >= 1) then
-   				put("Pushing North Cell");
-   				push(maze(currentX,currentY-1).symbol,currentX,currentY-1);
-   			end if;
 
-   			if(currentY+1 <= length) then
-   				put("Pushing south Cell");
-   				push(maze(currentX,currentY+1).symbol,currentX,currentY+1);
-   			end if;
+
+			put("Pushing West Cell"); new_line;
+			push(maze(currentX-1,currentY).symbol,currentX-1,currentY);
+
+
+
+			put("Pushing North Cell"); new_line;
+			push(maze(currentX,currentY-1).symbol,currentX,currentY-1);
+
+			put("Pushing south Cell"); new_line;
+			push(maze(currentX,currentY+1).symbol,currentX,currentY+1);
+
+        elsif (maze(currentX,currentY).isVisited = true) then
+
+        put("BEEN VISITED");
    			
    		end if;
 
