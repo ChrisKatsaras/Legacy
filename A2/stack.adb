@@ -7,8 +7,8 @@ package body stack is
  		x : integer;
  		y : integer;
 		end record;
-		type test is array(1..100) of node;
-		stack : test;
+		type list is array(1..100) of node;
+		stack : list;
 		top : natural := 0;
 
 		procedure push(symbol : in character; x : in integer; y : in integer) is
@@ -30,9 +30,11 @@ package body stack is
 		procedure print is
 		begin
 			for i in 1..top loop
+				put("(");
 				put(stack(i).symbol);
 				put(Integer'image(stack(i).x));
 				put(Integer'image(stack(i).y));
+				put(")");
 			end loop; 
 		end print;
 
@@ -44,5 +46,10 @@ package body stack is
 				return false;
 			end if;
 		end isEmpty;
+
+		procedure emptyStack is
+		begin
+			top := 0;
+		end emptyStack;
 
 end stack;

@@ -10,7 +10,6 @@ procedure Maze is
    line : unbounded_string;
    length : integer := 0; 
    width : integer := 0;
-   turns : integer := 0;
    scanChar : character;
 
    type cell is
@@ -45,8 +44,8 @@ begin
    				currentX := j;
    				currentY := i;
    				currentSymbol := 'o';
+                maze(j,i).path := 2;
    				push(currentSymbol,currentX,currentY);
-   				--maze(i,j).isVisited := true;
    			end if; 
    		end loop;
    end loop;
@@ -61,14 +60,14 @@ begin
    		if(currentSymbol = 'e') then
    			put("We found the end!");
    			new_line;
-   			maze(currentX,currentY).path := 1;
-   			put("Printing stack");
-   			print;
+   			maze(currentX,currentY).path := 3;
    			exit;
    		elsif(currentSymbol /= '*' and maze(currentX,currentY).isVisited = false) then
-   		    turns := turns +1;
    			maze(currentX,currentY).isVisited := true;
-   			maze(currentX,currentY).path := 1;
+   			if(maze(currentX,currentY).symbol /= 'o') then
+                 maze(currentX,currentY).path := 1;
+            end if;
+           
    			if(currentX+1 <= width) then
    				put("Pushing East Cell");
    				push(maze(currentX+1,currentY).symbol,currentX+1,currentY);
@@ -94,16 +93,43 @@ begin
    		new_line;
    end loop;
 
-
    close(infp);
+
+   emptyStack;
+
+   for i in 1..length loop
+        for j in 1..width loop
+            if((maze(j,i).path = 3 or maze(j,i).path = 2 or maze(j,i).path = 1) and maze(j,i).symbol /= '*') then
+                push(maze(j,i).symbol,j,i);
+            end if;
+        end loop;
+   end loop;
+   print;
+   new_line;
+
+   
 
    for i in 1..length loop
    		for j in 1..width loop
-   			put(Integer'image(maze(j,i).path));
+            if(maze(j,i).path = 0) then
+                if(maze(j,i).symbol = '*') then
+                    put("*");
+                elsif(maze(j,i).symbol = '.') then
+                    put(".");    
+                end if;    
+            elsif(maze(j,i).path = 3) then
+                put("e");
+            elsif(maze(j,i).path = 2) then
+                put("o");        
+            else
+                put("V");     
+            end if;
+   			--put(Integer'image(maze(j,i).path));
    		end loop;
    		new_line;
    end loop;
-   put(Integer'image(turns));
+
+
 
 end Maze;
 
