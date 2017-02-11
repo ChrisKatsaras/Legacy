@@ -3,6 +3,5 @@ package stack is
 	procedure print;
 	procedure pop(symbol : out character; x: out integer; y : out integer);
 	procedure emptyStack;
-
 	function isEmpty return Boolean;
 end stack;
