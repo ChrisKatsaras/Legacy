@@ -14,13 +14,13 @@ with stack; use stack;
 procedure Maze is
 	
   infp : file_type;
-  filename : unbounded_string;
   line : unbounded_string;
   length : integer := 0; 
   width : integer := 0;
   scanChar : character;
   traversed : boolean := false; 
-
+  filename: String(1 .. 50);
+  last: Integer;
   --Cell holds data pertaining to a specific location in the maze
   type cell is
  	record
@@ -37,9 +37,9 @@ procedure Maze is
 	
 begin
 
-   --Put_Line("Input filename");
-   --get_line(filename);
-   open(infp,in_file,"maze.txt");--Opens the maze file
+   Put_Line("Input filename");
+   Get_Line(filename, last);
+   open(infp,in_file,filename);--Opens the maze file
    get(infp,length); --Gets the length and width from user. Works with any dimension given
    get(infp,width);
 
