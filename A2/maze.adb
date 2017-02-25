@@ -5,6 +5,7 @@
 --Known limitations:
 --1. Currently, the path drawn may contain "dead ends" as Prof Wirth said it was alright to leave them in.
 --2. Maze must be surrounded by walls. Cannot have a path on the edge of the maze
+--3. Filename can only be 50 characters long
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.integer_text_IO; use Ada.integer_text_IO;
@@ -63,15 +64,9 @@ begin
    --Implementation of algorithm given by Prof. Wirth
    --Loops until the stack is empty
    while isEmpty = false loop 
-   		put("Looking a cell at location");
    		pop(currentSymbol,currentX,currentY);
-   		put(Integer'image(currentX));
-   		put(Integer'image(currentY));
-   		put(currentSymbol);
-
         --If we reatch the end. We are done!
    		if(currentSymbol = 'e') then
-   			put("We found the end!");
    			new_line;
    			maze(currentX,currentY).path := 3;
    			exit;
@@ -83,43 +78,25 @@ begin
             end if;
            
    			if(currentX+1 <= width) then
-   				put("Pushing East Cell");
    				push(maze(currentX+1,currentY).symbol,currentX+1,currentY);
    			end if;	
 
    			if(currentX-1 >= 1) then
-   				put("Pushing West Cell");
    				push(maze(currentX-1,currentY).symbol,currentX-1,currentY);
    			end if;
 
    			if(currentY-1 >= 1) then
-   				put("Pushing North Cell");
    				push(maze(currentX,currentY-1).symbol,currentX,currentY-1);
    			end if;
 
    			if(currentY+1 <= length) then
-   				put("Pushing south Cell");
    				push(maze(currentX,currentY+1).symbol,currentX,currentY+1);
    			end if;
    			
    		end if;
-
-   		new_line;
    end loop;
 
    close(infp); --Closes file
-
-   --emptyStack;
-
-   --for i in 1..length loop
-     --   for j in 1..width loop
-       --     if(maze(j,i).path = 3 or maze(j,i).path = 2 or maze(j,i).path = 1) then
-         --       push(maze(j,i).symbol,j,i);
-           -- end if;
-        --end loop;
-   --end loop;
-   --print;
-   --new_line;
 
    --Loops though maze and prints final traversed path
    for i in 1..length loop
