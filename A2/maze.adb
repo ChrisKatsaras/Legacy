@@ -22,6 +22,7 @@ procedure Maze is
   traversed : boolean := false; 
   filename: String(1 .. 50);
   last: Integer;
+  validFilename : Boolean := true;
   --Cell holds data pertaining to a specific location in the maze
   type cell is
  	record
@@ -41,6 +42,10 @@ begin
    Put_Line("Input filename");
    Get_Line(filename, last);
    open(infp,in_file,filename);--Opens the maze file
+
+   exception
+        when name_error => put_line("Invalid filename!");
+
    get(infp,length); --Gets the length and width from user. Works with any dimension given
    get(infp,width);
 
