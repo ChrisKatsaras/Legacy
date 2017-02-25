@@ -9,7 +9,8 @@ package body stack is
  			x : integer;
  			y : integer;
 		end record;
-		type list is array(1..100) of node;--The stack is simply an array of type node.
+		--The size of the stack is hardcoded to 2500 due to the fact that in a maze of 50 x 50, there are 2500 spots
+		type list is array(1..2500) of node;--The stack is simply an array of type node.
 		stack : list;
 		top : natural := 0;
 

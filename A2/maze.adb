@@ -22,7 +22,6 @@ procedure Maze is
   traversed : boolean := false; 
   filename: String(1 .. 50);
   last: Integer;
-  validFilename : Boolean := true;
   --Cell holds data pertaining to a specific location in the maze
   type cell is
  	record
@@ -42,12 +41,8 @@ begin
    Put_Line("Input filename");
    Get_Line(filename, last);
    open(infp,in_file,filename);--Opens the maze file
-
-   exception
-        when name_error => put_line("Invalid filename!");
-
-   get(infp,length); --Gets the length and width from user. Works with any dimension given
-   get(infp,width);
+   get(infp,width); --Gets the length and width from user. Works with any dimension given
+   get(infp,length);
 
    --Scans maze from file into 2D array that holds maze values
    for i in 1..length loop
@@ -70,6 +65,7 @@ begin
    --Loops until the stack is empty
    while isEmpty = false loop 
    		pop(currentSymbol,currentX,currentY);
+
         --If we reatch the end. We are done!
    		if(currentSymbol = 'e') then
    			new_line;
@@ -99,6 +95,7 @@ begin
    			end if;
    			
    		end if;
+
    end loop;
 
    close(infp); --Closes file
