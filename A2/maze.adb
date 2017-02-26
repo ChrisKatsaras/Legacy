@@ -13,7 +13,7 @@ with Ada.strings.unbounded; use ada.strings.unbounded;
 with Ada.strings.unbounded.Text_IO; use ada.strings.unbounded.Text_IO;
 with stack; use stack;
 procedure Maze is
-	
+
   infp : file_type;
   line : unbounded_string;
   length : integer := 0; 
@@ -40,9 +40,11 @@ begin
 
    Put_Line("Input filename");
    Get_Line(filename, last);
+
    open(infp,in_file,filename);--Opens the maze file
    get(infp,width); --Gets the length and width from user. Works with any dimension given
    get(infp,length);
+
 
    --Scans maze from file into 2D array that holds maze values
    for i in 1..length loop
@@ -119,6 +121,7 @@ begin
    		end loop;
    		new_line;
    end loop;
-
+exception
+        when name_error => put_line("Invalid Filename");
 end Maze;
 
