@@ -4,7 +4,7 @@ program-id. A3text.
 environment division.
 input-output section.
 file-control.
-select textFile assign to "text.txt"
+select textFile assign to "LOTR.txt"
 organization is line sequential.
 
 data division.
