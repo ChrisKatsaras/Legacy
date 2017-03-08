@@ -9,13 +9,13 @@ program-id. A3text.
 environment division.
 input-output section.
 file-control.
-select textFile assign to "vader.txt"*>file-name
+select textFile assign to "test.txt"*>file-name
 	organization is line sequential.
 
 data division.
 file section.
 FD textFile.
-01 input-text	pic x(500).
+01 input-text	pic x(5008).
 
 working-storage section.
 01 storage	pic x(500).
@@ -28,6 +28,9 @@ working-storage section.
 01 i pic 9(10).
 77 eof-switch pic 9 value 1.
 77 word-flag  pic 9 value 0.
+77 final-words pic z(10).
+77 final-chars pic z(10).
+77 final-sentences pic z(10).
 
 procedure division.
 	
@@ -62,7 +65,7 @@ procedure division.
 						add 1 to num-chars
 						if storage(i:1) is alphabetic and word-flag is zero
 							move 1 to word-flag
-							add 1 to num-words
+							compute num-words = num-words + 1
 
 						else if storage(i:1) is = "." or storage(i:1) is = "?" or storage(i:1) is = "!"  
 						    add 1 to num-sentences
@@ -76,12 +79,15 @@ procedure division.
 				end-perform
 	    end-read	
 	end-perform
+	move num-words to final-words
+	move num-chars to final-chars
+	move num-sentences to final-sentences
 	display "Number of chars"
-	display num-chars
-	display "Number of words"
-	display num-words
+	display final-chars
+	display "Number of words" 
+	display final-words
 	display "Number of sentences"
-	display num-sentences
+	display final-sentences
 
     close textFile.
 stop run.
