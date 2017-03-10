@@ -33,6 +33,8 @@ working-storage section.
 77 final-chars pic z(10).
 77 final-sentences pic z(10).
 77 final-nums pic z(10).
+77 average-sentence pic z(10)9.9.
+77 average-word pic z(10)9.9.
 
 procedure division.
 	
@@ -90,18 +92,25 @@ procedure division.
 				end-perform
 	    end-read	
 	end-perform
+	compute average-sentence = num-words / num-sentences
+	compute average-word = num-chars / num-words
+
 	move num-words to final-words
 	move num-chars to final-chars
 	move num-sentences to final-sentences
 	move num-nums to final-nums
-	display "Number of chars =     " no advancing
+	display "Number of chars =                   " no advancing
 	display final-chars
-	display "Number of words =     " no advancing
+	display "Number of words =                   " no advancing
 	display final-words
-	display "Number of sentences = " no advancing
+	display "Number of sentences =               " no advancing
 	display final-sentences
-	display "Number of numbers =   " no advancing
+	display "Number of numbers =                 " no advancing
 	display final-nums
+	display "Average number of words/sentence = " no advancing 
+	display average-sentence
+	display "Average number of chars/word =     " no advancing 
+	display average-word
 
     close textFile.
 stop run.
