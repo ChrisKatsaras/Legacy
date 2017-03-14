@@ -128,6 +128,7 @@ procedure division.
 	move num-sentences to final-sentences
 	move num-nums to final-nums
 
+	*>Writes stats to output file
 	write out-text from output-line after advancing 1 lines
     write out-text from stats-line after advancing 1 lines
    	write out-text from output-line after advancing 1 lines
