@@ -12,17 +12,19 @@ program-id. A3text.
 environment division.
 input-output section.
 file-control.
-select textFile assign to "vader.txt"*>file-name
-	organization is line sequential.
+select textFile assign to file-name
+	organization is line sequential
+	file status is file-status.
 select outFile	assign to "out.txt"
 	organization is line sequential.	
 
 data division.
 file section.
 fd textFile.
-01 input-text	pic x(3000).
+	01 input-text	pic x(3000).
+
 fd outFile.
-01 out-text	pic x(3000).
+	01 out-text	pic x(3000).
 
 working-storage section.
 01 storage	pic x(3000).
@@ -36,7 +38,7 @@ working-storage section.
 01 i pic 9(10).
 77 eof-switch pic 9 value 1.
 77 word-flag  pic 9 value 0.
-
+77 file-status pic XXX.
 *>Structures for write to file
 01 output-line.
    02  FILLER        PIC X(41) VALUE "-------------------".
@@ -71,9 +73,15 @@ procedure division.
 	move zero to num-nums
 
 	display "Please input the file you wish to analyise"
-	*>accept file-name
+	accept file-name
     open input textFile.
     open output outFile.
+
+    if file-status is equal to '35'
+   		close outFile 
+    	display "File doesn't exist"
+    	stop run
+    end-if
     write out-text from output-line after advancing 0 lines
     write out-text from input-line after advancing 1 lines
    	write out-text from output-line after advancing 1 lines
