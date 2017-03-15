@@ -15,7 +15,7 @@ file-control.
 select textFile assign to file-name
 	organization is line sequential
 	file status is file-status.
-select outFile	assign to "out.txt"
+select outFile	assign to out-name
 	organization is line sequential.	
 
 data division.
@@ -29,6 +29,7 @@ fd outFile.
 working-storage section.
 01 storage	pic x(3000).
 01 file-name  pic x(50).
+01 out-name  pic x(50).
 01 num-sentences pic 9(10).
 01 num-words pic 9(10).
 01 num-chars pic 9(10).
@@ -75,13 +76,15 @@ procedure division.
 	display "Please input the file you wish to analyise"
 	accept file-name
     open input textFile.
-    open output outFile.
 
     if file-status is equal to '35'
    		close outFile 
     	display "File doesn't exist"
     	stop run
     end-if
+    display "Please input the file you wish to output to"
+    accept out-name
+    open output outFile.
     write out-text from output-line after advancing 0 lines
     write out-text from input-line after advancing 1 lines
    	write out-text from output-line after advancing 1 lines
