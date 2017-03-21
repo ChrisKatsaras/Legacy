@@ -151,8 +151,13 @@ procedure division.
 	move num-chars to final-chars
 	move num-sentences to final-sentences
 	move num-nums to final-nums
+	perform fileWrite	
+    close textFile
+    close outFile
+stop run.
 
-	*>Writes stats to output file
+*>Writes stats to output file
+fileWrite.
 	write out-text from output-line after advancing 1 lines
     write out-text from stats-line after advancing 1 lines
    	write out-text from output-line after advancing 1 lines
@@ -161,10 +166,4 @@ procedure division.
    	write out-text from num-chars-line after advancing 1 lines
    	write out-text from total-numbers-line after advancing 1 lines	
    	write out-text from average-sentence-line after advancing 1 lines
-   	write out-text from average-word-line after advancing 1 lines	
-   		
-    close textFile
-    close outFile
-stop run.
-
-
+   	write out-text from average-word-line after advancing 1 lines.	
