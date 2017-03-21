@@ -21,7 +21,7 @@ select outFile	assign to out-name
 data division.
 file section.
 fd textFile.
-	01 input-text	pic x(3000).
+	01 input-text pic x(3000).
 
 fd outFile.
 	01 out-text	pic x(3000).
@@ -39,6 +39,7 @@ working-storage section.
 01 i pic 9(10).
 77 eof-switch pic 9 value 1.
 77 word-flag  pic 9 value 0.
+77 number-flag pic 9 value 0.
 77 file-status pic XXX.
 *>Structures for write to file
 01 output-line.
@@ -77,14 +78,18 @@ procedure division.
 	accept file-name
     open input textFile.
 
+    *>Checks to see if file inputted by user exists
     if file-status is equal to '35'
    		close outFile 
     	display "File doesn't exist"
     	stop run
     end-if
+
+    *>Gets user to input output file name
     display "Please input the file you wish to output to"
     accept out-name
     open output outFile.
+
     write out-text from output-line after advancing 0 lines
     write out-text from input-line after advancing 1 lines
    	write out-text from output-line after advancing 1 lines
@@ -106,20 +111,28 @@ procedure division.
 				move zero to word-flag
 				perform varying i from 1 by 1 until i > line-length
 					if storage(i:1) is not = " " then 
-						add 1 to num-chars
+						
+						if storage(i:1) is alphabetic
+							add 1 to num-chars
+							move zero to number-flag	
+						end-if
 						if storage(i:1) is alphabetic and word-flag is zero
 							move 1 to word-flag
 							compute num-words = num-words + 1
+							move zero to number-flag
 						else 
-							if storage(i:1) is numeric
+							if storage(i:1) is numeric and number-flag is zero
 								add 1 to num-nums
+								move 1 to number-flag	
 						else 
 							if storage(i:1) is = "." or storage(i:1) is = "?" or storage(i:1) is = "!"   
 							    add 1 to num-sentences
-							    move zero to word-flag	
+							    move zero to word-flag
+							    move zero to number-flag	
 						else 
 							if storage(i:1) is = "," or storage(i:1) is = ";"   
-							    move zero to word-flag	
+							    move zero to word-flag
+							    move zero to number-flag	
 						end-if	    	    	
 						end-if
 						end-if
