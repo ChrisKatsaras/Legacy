@@ -74,21 +74,7 @@ procedure division.
 	move zero to num-sentences
 	move zero to num-nums
 
-	display "Please input the file you wish to analyise"
-	accept file-name
-    open input textFile.
-
-    *>Checks to see if file inputted by user exists
-    if file-status is equal to '35'
-   		close outFile 
-    	display "File doesn't exist"
-    	stop run
-    end-if
-
-    *>Gets user to input output file name
-    display "Please input the file you wish to output to"
-    accept out-name
-    open output outFile.
+	perform fileOpen
 
     write out-text from output-line after advancing 0 lines
     write out-text from input-line after advancing 1 lines
@@ -156,6 +142,24 @@ procedure division.
     close outFile
 stop run.
 
+*>Opens files chosen by user
+fileOpen.
+	display "Please input the file you wish to analyise"
+	accept file-name
+    open input textFile
+
+    *>Checks to see if file inputted by user exists
+    if file-status is equal to '35'
+   		close outFile 
+    	display "File doesn't exist"
+    	stop run
+    end-if
+
+    *>Gets user to input output file name
+    display "Please input the file you wish to output to"
+    accept out-name
+    open output outFile.
+
 *>Writes stats to output file
 fileWrite.
 	write out-text from output-line after advancing 1 lines
@@ -166,4 +170,4 @@ fileWrite.
    	write out-text from num-chars-line after advancing 1 lines
    	write out-text from total-numbers-line after advancing 1 lines	
    	write out-text from average-sentence-line after advancing 1 lines
-   	write out-text from average-word-line after advancing 1 lines.	
+   	write out-text from average-word-line after advancing 1 lines.
