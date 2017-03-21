@@ -40,31 +40,31 @@ working-storage section.
 77 eof-switch pic 9 value 1.
 77 word-flag  pic 9 value 0.
 77 number-flag pic 9 value 0.
-77 file-status pic XXX.
+77 file-status pic xxx.
 *>Structures for write to file
 01 output-line.
-   02  FILLER        PIC X(41) VALUE "-------------------".
+   02  filler        pic x(41) value "-------------------".
 01 input-line.
-   02  FILLER        PIC X(19) VALUE "Input Text Analyzed".  
+   02  filler        pic x(19) value "Input Text Analyzed".  
 01 stats-line.
-   02  FILLER        PIC X(25) VALUE "Statistics From Analysis".
+   02  filler        pic x(25) value "Statistics From Analysis".
 01 num-sentences-line.
-   02  FILLER        PIC X(35)    VALUE "Number of sentences =              ".
+   02  filler        pic x(35) value "Number of sentences =              ".
    02  final-sentences pic z(10). 
 01 num-words-line.
-   02  FILLER        PIC X(35)    VALUE "Number of words =                  ".
+   02  filler        pic x(35) value "Number of words =                  ".
    02  final-words pic z(10).      
 01 num-chars-line.
-   02  FILLER        PIC X(35)    VALUE "Number of chars =                  ".
+   02  filler        pic x(35) value "Number of chars =                  ".
    02  final-chars pic z(10).
 01 average-sentence-line.
-   02  FILLER        PIC X(35)    VALUE "Average number of words/sentence = ".
+   02  filler        pic x(35) value "Average number of words/sentence = ".
    02  average-sentence pic z(10)9.9.
 01 average-word-line.
-   02  FILLER        PIC X(35)    VALUE "Average number of chars/word =     ".
+   02  filler        pic x(35)    VALUE "Average number of chars/word =     ".
    02  average-word pic z(10)9.9. 
 01 total-numbers-line.
-   02  FILLER        PIC X(35)    VALUE "Number of numbers                  ".
+   02  filler        pic x(35)    VALUE "Number of numbers                  ".
    02  final-nums pic z(10).                 
 
 procedure division.
