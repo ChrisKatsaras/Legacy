@@ -2,9 +2,15 @@
 *>By: Christopher Katsaras
 *>Due: March 24th/17
 *>This program analyizes a textfile of the user's choice
+*>*************************
 *>Assumptions/ Limitations:
+*>*************************
 *>1.A line in a file can only contain a max of 3000 characters
-*>2.
+*>2.Number of sentences will not be correct if initials are used e.g J.R.R Tolkien (Approved by Wirth)
+*>*********
+*>Additions
+*>*********
+*>1.Given the user the option of what file to write to
 
 identification division.
 program-id. A3text.
@@ -59,10 +65,10 @@ working-storage section.
    02  final-chars pic z(10).
 01 average-sentence-line.
    02  filler        pic x(35) value "Average number of words/sentence = ".
-   02  average-sentence pic z(10)9.9.
+   02  average-sentence pic z(10)9.99.
 01 average-word-line.
    02  filler        pic x(35)    VALUE "Average number of chars/word =     ".
-   02  average-word pic z(10)9.9. 
+   02  average-word pic z(10)9.99. 
 01 total-numbers-line.
    02  filler        pic x(35)    VALUE "Number of numbers                  ".
    02  final-nums pic z(10).                 
@@ -79,8 +85,11 @@ procedure division.
     write out-text from output-line after advancing 0 lines
     write out-text from input-line after advancing 1 lines
    	write out-text from output-line after advancing 1 lines
+    
+    *>Implementation of state-based parsing
+    *>Loops through file reading character by character
+    *>Based on the character read, the 'state' changes.
     perform until eof-switch = 0
-    	
 	    read textFile into input-text
 	    	at end 
 	    		move zero to eof-switch
