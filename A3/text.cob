@@ -104,6 +104,8 @@ procedure division.
 
 				write out-text from storage after advancing 1 lines
 				move zero to word-flag
+				
+				*>Analyize each character on the given line
 				perform varying i from 1 by 1 until i > line-length
 					if storage(i:1) is not = " " then 
 						
