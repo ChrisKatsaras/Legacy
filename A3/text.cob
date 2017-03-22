@@ -70,7 +70,7 @@ working-storage section.
    02  filler        pic x(35)    VALUE "Average number of chars/word =     ".
    02  average-word pic z(10)9.99. 
 01 total-numbers-line.
-   02  filler        pic x(35)    VALUE "Number of numbers                  ".
+   02  filler        pic x(35)    VALUE "Number of numbers =                ".
    02  final-nums pic z(10).                 
 
 procedure division.
@@ -104,7 +104,7 @@ procedure division.
 
 				write out-text from storage after advancing 1 lines
 				move zero to word-flag
-				
+
 				*>Analyize each character on the given line
 				perform varying i from 1 by 1 until i > line-length
 					if storage(i:1) is not = " " then 
