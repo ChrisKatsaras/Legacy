@@ -71,7 +71,7 @@ working-storage section.
    02  average-word pic z(10)9.99. 
 01 total-numbers-line.
    02  filler        pic x(35)    VALUE "Number of numbers =                ".
-   02  final-nums pic z(10).                 
+   02  final-nums pic z(10)9.                 
 
 procedure division.
 	
