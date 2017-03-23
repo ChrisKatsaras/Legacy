@@ -2,6 +2,11 @@
 *>By: Christopher Katsaras
 *>Due: March 24th/17
 *>This program analyizes a textfile of the user's choice
+*>***********
+*>Compile/run
+*>***********
+*>compile: type "make"
+*>run: type "./text"
 *>*************************
 *>Assumptions/ Limitations:
 *>*************************
