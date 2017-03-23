@@ -23,7 +23,6 @@ select textFile assign to file-name
 	file status is file-status.
 select outFile	assign to out-name
 	organization is line sequential.	
-
 data division.
 file section.
 fd textFile.
@@ -67,10 +66,10 @@ working-storage section.
    02  filler        pic x(35) value "Average number of words/sentence = ".
    02  average-sentence pic z(10)9.99.
 01 average-word-line.
-   02  filler        pic x(35)    VALUE "Average number of chars/word =     ".
+   02  filler        pic x(35)    value "Average number of chars/word =     ".
    02  average-word pic z(10)9.99. 
 01 total-numbers-line.
-   02  filler        pic x(35)    VALUE "Number of numbers =                ".
+   02  filler        pic x(35)    value "Number of numbers =                ".
    02  final-nums pic z(10)9.                 
 
 procedure division.
