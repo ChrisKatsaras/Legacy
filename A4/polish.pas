@@ -106,10 +106,10 @@ begin
             then move(instring[item])
             else if instring[item] in (operatorset + ['(',')'])
                  then pushORmove(instring[item])
-                 else begin
-                     writeln(' illegal symbol ', instring[item]);
-                     item := lastin;
-                 end
+            else begin
+                 writeln(' illegal symbol ', instring[item]);
+                 item := lastin;
+            end
         until item = lastin;
         
         while top > 0 do move(pop); {purge stack}
