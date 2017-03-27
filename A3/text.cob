@@ -165,7 +165,6 @@ fileOpen.
 
     *>Checks to see if file inputted by user exists
     if file-status is equal to '35'
-   		close outFile 
     	display "File doesn't exist"
     	stop run
     end-if
