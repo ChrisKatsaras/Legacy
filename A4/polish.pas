@@ -71,7 +71,8 @@ begin
     else if its = ')'
          then begin
              while priority(stack[top]) <> priority('(') do move(pop);
-             discard := pop
+             discard := pop;
+             writeln('test',discard);
          end else if its in operatorset
                   then repeat
                       itemtostack := priority(its) > priority(stack[top]);
