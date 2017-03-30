@@ -53,18 +53,20 @@ do i=1,answerLength
             end if
         case ('a':'z','A':'Z','0':'9')
             polishLength = polishLength + 1
-            polishString(polishLength:polishLength) = originalString(i:i)    
+            polishString(polishLength:polishLength) = originalString(i:i)
+        case default
+            write(*,*) "Invalid operator!"        
     end select
 
 end do
 
 do
-    polishLength = polishLength + 1
-    polishString(polishLength:polishLength) = stack(top:top)
-    top = top - 1 
     if(top <= 0) then
         exit
     end if
+    polishLength = polishLength + 1
+    polishString(polishLength:polishLength) = stack(top:top)
+    top = top - 1 
 end do
 
 write(*,*) polishString(1:polishLength);
