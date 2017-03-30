@@ -16,15 +16,17 @@
 
 program polish
 
+implicit none 
 character (len = 40) :: originalString, polishString, stack
-integer :: answerLength, i, polishLength, top, priority
+integer :: answerLength, i, polishLength, priority
 character :: playFlag
+integer top
 
 
 playFlag = 'Y'
 
 do while(playFlag == 'Y')
-    polishLength = 1
+    polishLength = 0
     top = 0
     stack(top:top) = '%'
     write(*,*) "Please input an algebraic expression to convert"
@@ -38,7 +40,7 @@ do while(playFlag == 'Y')
                     if (priority(originalString(i:i)) > priority(stack(top:top))) then
                         !top = top + 1
                         !stack(top:top) = originalString(i:i)
-                        call push(originalString,stack,top)
+                        call push(originalString, stack)
                         exit
                     else 
                         polishLength = polishLength + 1
@@ -48,8 +50,9 @@ do while(playFlag == 'Y')
                 end do
             case ('(',')')
                 if(originalString(i:i) == '(') then
-                    top = top + 1
-                    stack(top:top) = '('
+                    !top = top + 1
+                    !stack(top:top) = '('
+                    call push(originalString,stack);
                 else if(originalString(i:i) == ')') then
                     do while(priority(stack(top:top)) /= priority('('))
                         polishLength = polishLength + 1
@@ -86,16 +89,21 @@ do while(playFlag == 'Y')
     read(*,*) playFlag !Prompts the user if they would like to convert another expression
 
 end do
-end
 
-subroutine push(originalString,stack,top)
-    character (len=*) :: stack, originalString
-    integer :: top
-    top = top + 1
-    stack(top:top) = originalString(i:i)
+write(*,*) 'Goodbye!'
 
+contains 
+
+subroutine push(originalString, stack)
+    character (len=*) :: originalString, stack
+    integer temp
+    temp = top + 1
+    top = temp
+    stack(temp:temp) = originalString(i:i)
 return 
 end subroutine push
+
+end program polish
 
 integer function priority(sym)
     character :: sym
@@ -112,4 +120,3 @@ integer function priority(sym)
             priority = 3        
     end select
 end function priority
-
