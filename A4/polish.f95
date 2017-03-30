@@ -11,11 +11,13 @@
 !*****************
 !Known limitations
 !*****************
+!
+!
 
 program polish
 
 character (len = 40) :: originalString, polishString, stack
-integer :: answerLength, i, polishLength, top, test, priority
+integer :: answerLength, i, polishLength, top, priority
 character :: playFlag
 
 
@@ -34,8 +36,9 @@ do while(playFlag == 'Y')
             case ('%','+','-','*','/','^')!,'(',')')
                 do
                     if (priority(originalString(i:i)) > priority(stack(top:top))) then
-                        top = top + 1
-                        stack(top:top) = originalString(i:i)
+                        !top = top + 1
+                        !stack(top:top) = originalString(i:i)
+                        call push(originalString,stack,top)
                         exit
                     else 
                         polishLength = polishLength + 1
@@ -84,6 +87,15 @@ do while(playFlag == 'Y')
 
 end do
 end
+
+subroutine push(originalString,stack,top)
+    character (len=*) :: stack, originalString
+    integer :: top
+    top = top + 1
+    stack(top:top) = originalString(i:i)
+
+return 
+end subroutine push
 
 integer function priority(sym)
     character :: sym
