@@ -43,9 +43,10 @@ do while(playFlag == 'Y')
                         call push(originalString, stack)
                         exit
                     else 
-                        polishLength = polishLength + 1
-                        polishString(polishLength:polishLength) = stack(top:top)
-                        top = top - 1               
+                        !polishLength = polishLength + 1
+                        !polishString(polishLength:polishLength) = stack(top:top)
+                        !top = top - 1
+                        call pop(polishString,stack)               
                     endif
                 end do
             case ('(',')')
@@ -55,9 +56,10 @@ do while(playFlag == 'Y')
                     call push(originalString,stack);
                 else if(originalString(i:i) == ')') then
                     do while(priority(stack(top:top)) /= priority('('))
-                        polishLength = polishLength + 1
-                        polishString(polishLength:polishLength) = stack(top:top)
-                        top = top - 1
+                        !polishLength = polishLength + 1
+                        !polishString(polishLength:polishLength) = stack(top:top)
+                        !top = top - 1
+                        call pop(polishString,stack)
                     end do
                     top = top - 1
                 end if
@@ -103,6 +105,15 @@ subroutine push(originalString, stack)
 return 
 end subroutine push
 
+subroutine pop(polishString, stack)
+    character (len=*) :: polishString, stack
+    integer temp
+    polishLength = polishLength + 1
+    polishString(polishLength:polishLength) = stack(top:top)
+    temp = top - 1
+    top = temp
+return
+end subroutine pop
 end program polish
 
 integer function priority(sym)
