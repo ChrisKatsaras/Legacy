@@ -1,6 +1,6 @@
-!A4: Reverse polish form
+!A4: Reverse polish form : Fortran
 !Written by Christopher Katsaras
-!April 7th
+!April 7th/2017
 !
 !***********
 !Compile/run
@@ -99,19 +99,27 @@ contains
 subroutine push(originalString, stack)
     character (len=*) :: originalString, stack
     integer temp
-    temp = top + 1
-    top = temp
-    stack(temp:temp) = originalString(i:i)
+    if(top < 40) then
+        temp = top + 1
+        top = temp
+        stack(temp:temp) = originalString(i:i)
+    else 
+        write(*,*) "Stack overflow!"
+    end if;    
 return 
 end subroutine push
 
 subroutine pop(polishString, stack)
     character (len=*) :: polishString, stack
     integer temp
-    polishLength = polishLength + 1
-    polishString(polishLength:polishLength) = stack(top:top)
-    temp = top - 1
-    top = temp
+    if(top > 0) then
+        polishLength = polishLength + 1
+        polishString(polishLength:polishLength) = stack(top:top)
+        temp = top - 1
+        top = temp
+    else
+        write(*,*) "Stack underflow!"    
+    end if;    
 return
 end subroutine pop
 end program polish
