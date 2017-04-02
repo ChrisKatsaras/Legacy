@@ -35,30 +35,20 @@ do while(playFlag == 'Y')
 
     do i=1,answerLength
         select case (originalString(i:i))
-            case ('%','+','-','*','/','^')!,'(',')')
+            case ('%','+','-','*','/','^')
                 do
                     if (priority(originalString(i:i)) > priority(stack(top:top))) then
-                        !top = top + 1
-                        !stack(top:top) = originalString(i:i)
                         call push(originalString, stack)
                         exit
                     else 
-                        !polishLength = polishLength + 1
-                        !polishString(polishLength:polishLength) = stack(top:top)
-                        !top = top - 1
                         call pop(polishString,stack)               
                     endif
                 end do
             case ('(',')')
                 if(originalString(i:i) == '(') then
-                    !top = top + 1
-                    !stack(top:top) = '('
                     call push(originalString,stack);
                 else if(originalString(i:i) == ')') then
                     do while(priority(stack(top:top)) /= priority('('))
-                        !polishLength = polishLength + 1
-                        !polishString(polishLength:polishLength) = stack(top:top)
-                        !top = top - 1
                         call pop(polishString,stack)
                     end do
                     top = top - 1
