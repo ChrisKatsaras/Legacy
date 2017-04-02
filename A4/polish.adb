@@ -57,7 +57,7 @@ end push;
 procedure pop(sym:character) is
 begin
    polishLength := polishLength + 1;
-   polishString(polishLength) := sym;
+   polishString(polishLength) := stack(top);
    top := top - 1;
 end pop;
 	
@@ -76,14 +76,13 @@ begin
    				polishLength := polishLength + 1;
    				polishString(polishLength) := currentChar;
    			when '%' | '+' | '-' | '*' | '/' | '^' => 
-      				loop
+      			loop
                   if(priority(currentChar) > priority(stack(top))) then
       					push(currentChar);
                      exit;
                   else
                      pop(currentChar);    
       				end if;
-
                end loop;
 
    			when '(' | ')' => 
@@ -93,7 +92,7 @@ begin
                   while (priority(stack(top)) /= priority('(')) loop
                      pop(currentChar);
                   end loop;   
-                  top := top -1;
+                  top := top - 1;
                end if;
    			when others => 
    				put_line("Invalid operator!");
