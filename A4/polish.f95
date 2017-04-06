@@ -30,7 +30,8 @@ do while(playFlag == 'Y')
     top = 0
     stack(top:top) = '%'
     write(*,*) "Please input an algebraic expression to convert"
-    read(*,*) originalString
+    read(*,'(A)') originalString
+    write(*,*) originalString
     answerLength = len_trim(originalString)
 
     do i=1,answerLength
