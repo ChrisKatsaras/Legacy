@@ -30,7 +30,7 @@ do while(playFlag == 'Y')
     polishLength = 0
     top = 0
     stack(top:top) = '%'
-    write(*,*) "Please input an algebraic expression to convert"
+    write(*,*) "Please input an algebraic expression to convert (No spaces, please)"
     read(*,'(A)') originalString
     write(*,*) originalString
     answerLength = len_trim(originalString)
@@ -61,9 +61,6 @@ do while(playFlag == 'Y')
             case default
                 write(*,*) "Invalid operator!"        
         end select
-        write(*,*) stack(1:20);
-        write(*,*) top;
-
     end do
 
     do

@@ -14,3 +14,4 @@ clean:
 	rm a.out
 	rm *.o
 	rm polish
+	rm *.ali
