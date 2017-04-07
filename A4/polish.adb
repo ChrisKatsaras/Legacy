@@ -80,7 +80,7 @@ begin
       top := 1;
       stack(top) := '%';
 
-      Put_Line("Please input an algebraic expression to convert");
+      Put_Line("Please input an algebraic expression to convert (No spaces, please)");
       Get_Line(originalString, length);
 
       for i in 1..length loop

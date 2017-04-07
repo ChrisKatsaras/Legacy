@@ -18,6 +18,7 @@
 originalString = []
 polishString = []
 stack = []
+playAgain = 'Y'
 
 #Function definitions
 def push(symbol, stack, top):
@@ -48,42 +49,46 @@ def priority(sym):
 	else:
 		return -2;
 
+while (playAgain == 'Y'):
+	print "Please input an algebraic expression to convert (No spaces, please)"
 
-print "Please input an algebraic expression to convert"
+	originalString = raw_input()
+	length = len(originalString)
+	polishLength = 0
+	top = 0
 
-originalString = raw_input()
-length = len(originalString)
-polishLength = 0
-top = 0
+	stack.insert(top,'%')
 
-stack.insert(top,'%')
-
-for char in originalString:
-	if char.isalnum():
-		polishLength += 1
-		polishString.insert(polishLength,char)
-	elif char == '%' or char == '+' or char == '-' or char == '*' or char == '/' or char == '^':
-		while (priority(char) <= priority(stack[top])):
+	for char in originalString:
+		if char.isalnum():
 			polishLength += 1
-			top = pop(polishString,stack,top)
-		top = push(char,stack,top)
-	elif char == '(':
-		top = push(char,stack,top)
-	elif char == ')':
-		while (priority(stack[top]) != priority('(')):
-			polishLength += 1	
-			top = pop(polishString,stack,top)
-		top -= 1	
-	else :
-		print "Invalid operator"	
+			polishString.insert(polishLength,char)
+		elif char == '%' or char == '+' or char == '-' or char == '*' or char == '/' or char == '^':
+			while (priority(char) <= priority(stack[top])):
+				polishLength += 1
+				top = pop(polishString,stack,top)
+			top = push(char,stack,top)
+		elif char == '(':
+			top = push(char,stack,top)
+		elif char == ')':
+			while (priority(stack[top]) != priority('(')):
+				polishLength += 1	
+				top = pop(polishString,stack,top)
+			top -= 1	
+		else :
+			print "Invalid operator"	
 
-while (top > 0):
-	if(stack[top] == '('):
-		print "Unmatched brackets"
-	else :
-		polishLength += 1
-		polishString.insert(polishLength,stack[top])
-	top -= 1
+	while (top > 0):
+		if(stack[top] == '('):
+			print "Unmatched brackets"
+		else :
+			polishLength += 1
+			polishString.insert(polishLength,stack[top])
+		top -= 1
 
-print "".join(polishString)
-
+	print "".join(polishString)
+	#print "Would you like to convert another expression? (Type Y to play again or any other key to exit)"
+	playAgain = raw_input("Would you like to convert another expression? (Type Y to play again or any other key to exit)")
+	stack[:] = []
+	polishString[:] = []
+print "Goodbye"	
