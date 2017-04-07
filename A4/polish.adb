@@ -11,8 +11,9 @@
 --*****************
 --Known limitations
 --*****************
---
---
+--1.Spaces in inputted equation may cause incorrect output
+--e.g 1   + 2 * (3-  2) = NOT SUPPORTED :(
+--e.g 1+2*(3-2) = SUPPORTED :) 
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.integer_text_IO; use Ada.integer_text_IO;

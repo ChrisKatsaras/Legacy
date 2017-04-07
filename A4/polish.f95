@@ -11,8 +11,9 @@
 !*****************
 !Known limitations
 !*****************
-!
-!
+!1.Spaces in inputted equation may cause incorrect output
+!e.g 1   + 2 * (3-  2) = NOT SUPPORTED :(
+!e.g 1+2*(3-2) = SUPPORTED :) 
 
 program polish
 
@@ -60,6 +61,8 @@ do while(playFlag == 'Y')
             case default
                 write(*,*) "Invalid operator!"        
         end select
+        write(*,*) stack(1:20);
+        write(*,*) top;
 
     end do
 

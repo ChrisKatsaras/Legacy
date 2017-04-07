@@ -11,8 +11,9 @@
 #*****************
 #Known limitations
 #*****************
-#
-#
+#1.Spaces in inputted equation may cause incorrect output
+#e.g 1   + 2 * (3-  2) = NOT SUPPORTED :(
+#e.g 1+2*(3-2) = SUPPORTED :) 
 
 originalString = []
 polishString = []
@@ -21,11 +22,13 @@ stack = []
 #Function definitions
 def push(symbol, stack, top):
 	top += 1
-	stack.insert(top,symbol)
+	try:
+		stack[top] = symbol
+	except IndexError:
+		stack.insert(top,symbol)	
 	return top;
 
-def pop(polishString, stack, top, polishLength):
-	polishLength += 1
+def pop(polishString, stack, top):
 	polishString.insert(polishLength,stack[top])
 	top -= 1
 	return top;	
@@ -61,13 +64,15 @@ for char in originalString:
 		polishString.insert(polishLength,char)
 	elif char == '%' or char == '+' or char == '-' or char == '*' or char == '/' or char == '^':
 		while (priority(char) <= priority(stack[top])):
-			top = pop(polishString,stack,top,polishLength)
+			polishLength += 1
+			top = pop(polishString,stack,top)
 		top = push(char,stack,top)
 	elif char == '(':
 		top = push(char,stack,top)
 	elif char == ')':
-		while (priority(stack[top]) != priority('(')):	
-			top = pop(polishString,stack,top,polishLength)
+		while (priority(stack[top]) != priority('(')):
+			polishLength += 1	
+			top = pop(polishString,stack,top)
 		top -= 1	
 	else :
 		print "Invalid operator"	
