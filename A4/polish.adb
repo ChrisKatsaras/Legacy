@@ -13,7 +13,9 @@
 --*****************
 --1.Spaces in inputted equation may cause incorrect output
 --e.g 1   + 2 * (3-  2) = NOT SUPPORTED :(
---e.g 1+2*(3-2) = SUPPORTED :) 
+--e.g 1+2*(3-2) = SUPPORTED :)
+--2.Equations should be inputted with NO spaces for best results
+--3.Equations cannot be longer than 40 symbols (Approved by Prof Wirth) 
 
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.integer_text_IO; use Ada.integer_text_IO;
@@ -32,6 +34,8 @@ top : Integer;
 currentChar : character;
 playFlag : character;
 
+--Function definitions
+--Returns the priority of a specific symbol
 function priority(sym:character) return Integer is
 begin
 	case sym is
@@ -51,6 +55,7 @@ begin
 	end case;
 end priority;
 
+--Pushes item to the stack
 procedure push(sym:character) is
 begin
    if(top < 40) then
@@ -61,6 +66,7 @@ begin
    end if;
 end push;
 
+--Pops item off stack and put inserts it into the output string
 procedure pop(sym:character) is
 begin
    if(top > 0) then
@@ -74,7 +80,7 @@ end pop;
 	
 begin
    playFlag := 'Y';
-
+   --Loops until user chooses to quit
    while (playFlag = 'Y') loop
       polishLength := 0;
       top := 1;
@@ -83,6 +89,7 @@ begin
       Put_Line("Please input an algebraic expression to convert (No spaces, please)");
       Get_Line(originalString, length);
 
+      --Uses a state based parsing method where each character is examined individually 
       for i in 1..length loop
       		currentChar := originalString(i);
       		case currentChar is
@@ -125,16 +132,13 @@ begin
 
       for i in 1..polishLength loop
       		put(polishString(i));
-
       end loop;
       new_line;
       put_line("Would you like to convert another expression? (Type Y to play again or any other key to exit)");
-      get(playFlag);
+      get(playFlag); --Gets user input
       Get_Line(garbageString,length);--Removes any leftover values in the buffer
    end loop;
    new_line;
    put_line("Goodbye");
-
-
 end polish;
 

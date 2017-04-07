@@ -14,6 +14,8 @@
 !1.Spaces in inputted equation may cause incorrect output
 !e.g 1   + 2 * (3-  2) = NOT SUPPORTED :(
 !e.g 1+2*(3-2) = SUPPORTED :) 
+!2.Equations should be inputted with NO spaces for best results
+!3.Equations cannot be longer than 40 symbols (Approved by Prof Wirth)
 
 program polish
 
@@ -26,6 +28,7 @@ integer top
 
 playFlag = 'Y'
 
+!Loops until user chooses to quit
 do while(playFlag == 'Y')
     polishLength = 0
     top = 0
@@ -35,6 +38,7 @@ do while(playFlag == 'Y')
     write(*,*) originalString
     answerLength = len_trim(originalString)
 
+    !Uses a state based parsing method where each character is examined individually
     do i=1,answerLength
         select case (originalString(i:i))
             case ('%','+','-','*','/','^')
@@ -85,8 +89,9 @@ end do
 
 write(*,*) 'Goodbye!'
 
+!Subroutine and function definitions
 contains 
-
+!Pushes item to the stack
 subroutine push(originalString, stack)
     character (len=*) :: originalString, stack
     integer temp
@@ -100,6 +105,7 @@ subroutine push(originalString, stack)
 return 
 end subroutine push
 
+!Pops item off stack and put inserts it into the output string
 subroutine pop(polishString, stack)
     character (len=*) :: polishString, stack
     integer temp
@@ -115,6 +121,7 @@ return
 end subroutine pop
 end program polish
 
+!Returns the priority of a specific symbol
 integer function priority(sym)
     character :: sym
     select case(sym)
